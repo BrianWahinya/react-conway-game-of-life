@@ -6,7 +6,7 @@ Still under development:
 
 - [ ] Play, Pause, Restart
 - [ ] Speed
-- [ ] Size
+- [x] Cell size
 - [ ] Predefined patterns
 - [ ] Custom pattern
 - [ ] Styling
