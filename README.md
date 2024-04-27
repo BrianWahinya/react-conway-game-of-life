@@ -4,8 +4,9 @@
 
 Still under development:
 
-- [ ] Play, Pause, Restart
-- [ ] Speed
+- [x] Play, Pause
+- [ ] Restart
+- [x] Speed
 - [x] Cell size
 - [ ] Predefined patterns
 - [ ] Custom pattern

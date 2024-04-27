@@ -5,7 +5,7 @@ const AppContext = createContext();
 
 const defaultState = {
   speed: 800,
-  cellSize: 50,
+  cellSize: 20,
   playing: false,
 };
 

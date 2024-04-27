@@ -41,16 +41,53 @@ export const drawOnCanvas = (array, ctx, rows, cols, cellSize) => {
 };
 
 export const checkConwayRules = (array, rows, cols) => {
+  const subarray = deepCopy(array);
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
-      if (array[i][j] === 1) {
-        array[i][j] = 0;
-      } else {
-        array[i][j] = 1;
-      }
+      subarray[i][j] = conwayRules(array[i][j], i, j, array);
     }
   }
-  return array;
+  return subarray;
+};
+
+const conwayRules = (elem, row, col, array) => {
+  const neighbours = {
+    leftTop: array[row - 1]?.[col - 1],
+    leftMiddle: array[row]?.[col - 1],
+    leftBottom: array[row + 1]?.[col - 1],
+    middleTop: array[row - 1]?.[col],
+    middleBottom: array[row + 1]?.[col],
+    rightTop: array[row - 1]?.[col + 1],
+    rightMiddle: array[row]?.[col + 1],
+    rightBottom: array[row + 1]?.[col + 1],
+  };
+  const neighboursAlive = Object.values(neighbours).filter(
+    (val) => val === 1
+  ).length;
+
+  const isAlive = !!elem;
+
+  // Rule 4: Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction
+  if (!isAlive && neighboursAlive === 3) {
+    return 1;
+  }
+
+  // Rule 3: Any live cell with more than three live neighbors dies, as if by overpopulation.
+  if (isAlive && neighboursAlive > 3) {
+    return 0;
+  }
+
+  // Rule 2: Any live cell with two or three live neighbors lives on to the next generation
+  if (isAlive && neighboursAlive >= 2 && neighboursAlive <= 3) {
+    return 1;
+  }
+
+  // Rule 1: Any live cell with fewer than two live neighbors dies, as if by underpopulation
+  if (isAlive && neighboursAlive < 2) {
+    return 0;
+  }
+
+  return 0;
 };
 
 /*
