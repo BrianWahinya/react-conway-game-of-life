@@ -11,7 +11,7 @@ export const generateNestedArr = (rows, cols) => {
   return rowsArr;
 };
 
-export const drawOnCanvas = (cellSize, canvas) => {
+export const generateRowsCols = (cellSize, canvas) => {
   const ctx = canvas.getContext("2d");
 
   const dpr = window.devicePixelRatio || 1;
@@ -24,22 +24,40 @@ export const drawOnCanvas = (cellSize, canvas) => {
 
   const rows = Math.floor(height / cellSize);
   const cols = Math.floor(width / cellSize);
-  //   console.log({ rows, cols });
-  const array = generateNestedArr(rows, cols);
-  // console.log("array", array);
+  return { rows, cols, ctx };
+};
 
+export const drawOnCanvas = (array, ctx, rows, cols, cellSize) => {
   for (let i = 0; i < rows - 1; i++) {
     for (let j = 0; j < cols - 1; j++) {
-      const x = j * cellSize;
-      const y = i * cellSize;
-      ctx.fillStyle = array[i][j] ? "black" : "white";
-      ctx.fillRect(x, y, cellSize, cellSize);
-      ctx.strokeStyle = "grey";
-      ctx.strokeRect(x, y, cellSize, cellSize);
+      if (array[i] && array[i][j] !== undefined) {
+        const x = j * cellSize;
+        const y = i * cellSize;
+        ctx.fillStyle = array[i][j] ? "black" : "white";
+        ctx.fillRect(x, y, cellSize, cellSize);
+        ctx.strokeStyle = "grey";
+        ctx.strokeRect(x, y, cellSize, cellSize);
+      }
     }
   }
 };
 
+export const checkConwayRules = (array, rows, cols) => {
+  for (let i = 0; i < rows - 1; i++) {
+    for (let j = 0; j < cols - 1; j++) {
+      if (array[i] && array[i][j] !== undefined) {
+        if (array[i][j] === 1) {
+          array[i][j] = 0;
+        } else {
+          array[i][j] = 1;
+        }
+      }
+    }
+  }
+  return array;
+};
+
+/*
 export const drawOffCanvas = (cellSize, canvas) => {
   //   console.time("offcanvas");
   const ctx = canvas.getContext("2d");
@@ -80,3 +98,4 @@ export const drawOffCanvas = (cellSize, canvas) => {
   ctx.drawImage(offscreenCanvas, 0, 0);
   //   console.timeEnd("offcanvas");
 };
+*/

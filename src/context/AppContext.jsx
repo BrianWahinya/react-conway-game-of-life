@@ -4,7 +4,7 @@ import { deepCopy } from "../helpers/utils";
 const AppContext = createContext();
 
 const defaultState = {
-  speed: 500,
+  speed: 800,
   cellSize: 50,
   playing: false,
 };
