@@ -15,8 +15,8 @@ const reducer = (state, action) => {
       return { ...deepCopy(state), speed: action.payload };
     case "changeCellSize":
       return { ...deepCopy(state), cellSize: action.payload };
-    case "changeGameStatus":
-      return { ...deepCopy(state), playing: !state.playing };
+    case "playMode":
+      return { ...deepCopy(state), playing: action.payload };
     default:
       return state;
   }
@@ -33,13 +33,13 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "changeCellSize", payload: parseInt(size) });
   };
 
-  const changeGameStatus = () => {
-    dispatch({ type: "changeGameStatus" });
+  const playMode = (status) => {
+    dispatch({ type: "playMode", payload: status });
   };
 
   return (
     <AppContext.Provider
-      value={{ ...state, adjustSpeed, changeCellSize, changeGameStatus }}
+      value={{ ...state, adjustSpeed, changeCellSize, playMode }}
     >
       {children}
     </AppContext.Provider>

@@ -10,7 +10,7 @@ import { useAppContext } from "../../context/AppContext";
 import "./css/game.css";
 
 const Game = () => {
-  const { speed, cellSize, playing } = useAppContext();
+  const { speed, cellSize, playing, playMode } = useAppContext();
   const canvasRef = useRef(null);
   let array = useRef([]);
   let rows = useRef(0);
@@ -31,11 +31,19 @@ const Game = () => {
       rows.current = canvasRows;
       cols.current = canvasCols;
       // console.log("array", array.current, ctx, canvasCtx, rows, cols);
-      drawOnCanvas(array.current, canvasCtx, canvasRows, canvasCols, cellSize);
+      if (array.current.length) {
+        drawOnCanvas(
+          array.current,
+          canvasCtx,
+          canvasRows,
+          canvasCols,
+          cellSize
+        );
+      }
       return;
     }
 
-    if (!playing) return;
+    if (!playing && array.current.length > 1) return;
 
     const func = () => {
       //   console.log("array2", array.current);
@@ -55,7 +63,27 @@ const Game = () => {
     const timer = setInterval(func, speed);
 
     return () => clearInterval(timer);
-  }, [speed, cellSize, playing]);
+  }, [speed, playing]);
+
+  useLayoutEffect(() => {
+    playMode(false);
+
+    const cvs = canvasRef.current;
+    const {
+      rows: canvasRows,
+      cols: canvasCols,
+      ctx: canvasCtx,
+    } = generateRowsCols(cellSize, cvs);
+
+    array.current = generateNestedArr(canvasRows, canvasCols);
+    ctx.current = canvasCtx;
+    rows.current = canvasRows;
+    cols.current = canvasCols;
+    // console.log("array", array.current, ctx, canvasCtx, rows, cols);
+    if (array.current.length) {
+      drawOnCanvas(array.current, canvasCtx, canvasRows, canvasCols, cellSize);
+    }
+  }, [cellSize]);
 
   return <canvas ref={canvasRef}></canvas>;
 };

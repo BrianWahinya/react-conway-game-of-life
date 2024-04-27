@@ -2,14 +2,8 @@ import { useAppContext } from "../../context/AppContext";
 import "./css/controls.css";
 
 const Controls = () => {
-  const {
-    speed,
-    cellSize,
-    playing,
-    adjustSpeed,
-    changeCellSize,
-    changeGameStatus,
-  } = useAppContext();
+  const { speed, cellSize, playing, adjustSpeed, changeCellSize, playMode } =
+    useAppContext();
 
   const changeSize = (e) => {
     const val = e.target.value;
@@ -40,7 +34,9 @@ const Controls = () => {
         <option value={30}>30</option>
         <option value={50}>50</option>
       </select>
-      <button onClick={changeGameStatus}>{playing ? "Pause" : "Play"}</button>
+      <button onClick={() => playMode(!playing)}>
+        {playing ? "Pause" : "Play"}
+      </button>
     </div>
   );
 };
