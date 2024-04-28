@@ -11,6 +11,8 @@ export const generateNestedArr = (rows, cols) => {
   return rowsArr;
 };
 
+const floorToEven = (num) => (num % 2 !== 1 ? num : num - 1);
+
 export const generateRowsCols = (cellSize, canvas) => {
   const ctx = canvas.getContext("2d");
 
@@ -22,8 +24,8 @@ export const generateRowsCols = (cellSize, canvas) => {
 
   const { width, height } = canvas;
 
-  const rows = Math.floor(height / cellSize) - 1;
-  const cols = Math.floor(width / cellSize) - 1;
+  const rows = floorToEven(Math.floor(height / cellSize));
+  const cols = floorToEven(Math.floor(width / cellSize));
   return { rows, cols, ctx };
 };
 
@@ -32,9 +34,9 @@ export const drawOnCanvas = (array, ctx, rows, cols, cellSize) => {
     for (let j = 0; j < cols; j++) {
       const x = j * cellSize;
       const y = i * cellSize;
-      ctx.fillStyle = array[i][j] ? "black" : "white";
+      ctx.fillStyle = array[i][j] ? "#242424" : "#f7f7f7";
       ctx.fillRect(x, y, cellSize, cellSize);
-      ctx.strokeStyle = "grey";
+      ctx.strokeStyle = "#878787";
       ctx.strokeRect(x, y, cellSize, cellSize);
     }
   }
@@ -90,7 +92,121 @@ const conwayRules = (elem, row, col, array) => {
   return 0;
 };
 
+export const generateArrPattern = (pattern, rows, cols) => {
+  switch (pattern) {
+    case "alternate":
+      return generateAlternatePattern(rows, cols);
+    case "alternate-rectangle":
+      return generateAlternateRectanglePattern(rows, cols);
+    case "square":
+      return generateSquarePattern(rows, cols);
+    case "rectangle":
+      return generateRectanglePattern(rows, cols);
+    default:
+      return generateNestedArr(rows, cols);
+  }
+};
+
+const generateAlternatePattern = (rows, cols) => {
+  const pattern = [];
+  let startValue = 1;
+
+  for (let i = 0; i < rows; i++) {
+    const row = [];
+    let jValue = startValue;
+    for (let j = 0; j < cols; j++) {
+      row.push(jValue);
+      jValue = jValue ? 0 : 1;
+    }
+    pattern.push(row);
+    startValue = i % 2 !== 1 ? 0 : 1;
+  }
+
+  return pattern;
+};
+
+const generateAlternateRectanglePattern = (rows, cols) => {
+  const pattern = [];
+  let startI = 0;
+  let startValue = 1;
+
+  for (let i = 0; i < rows; i++) {
+    const row = [];
+    let jValue = startValue;
+    for (let j = 0; j < cols; j++) {
+      row.push(jValue);
+      jValue = jValue ? 0 : 1;
+    }
+    pattern.push(row);
+    if (i === startI) {
+      startI = startI + 2;
+    }
+    if (i + 1 === startI) {
+      startValue = startValue ? 0 : 1;
+    }
+  }
+
+  return pattern;
+};
+
+const generateSquarePattern = (rows, cols) => {
+  const pattern = [];
+  let startI = 0;
+  let startValue = 1;
+
+  for (let i = 0; i < rows; i++) {
+    const row = [];
+    let startJ = 0;
+    let jValue = startValue;
+    for (let j = 0; j < cols; j++) {
+      if (j === startJ) {
+        startJ = startJ + 2;
+        jValue = jValue ? 0 : 1;
+      }
+
+      row.push(jValue);
+    }
+    pattern.push(row);
+    if (i === startI) {
+      startI = startI + 2;
+    }
+    if (i + 1 === startI) {
+      startValue = startValue ? 0 : 1;
+    }
+  }
+
+  return pattern;
+};
+
+const generateRectanglePattern = (rows, cols) => {
+  const pattern = [];
+  let startI = 0;
+  let startValue = 1;
+
+  for (let i = 0; i < rows; i++) {
+    const row = [];
+    let startJ = 0;
+    let jValue = startValue;
+    for (let j = 0; j < cols; j++) {
+      if (j === startJ) {
+        startJ = startJ + 4;
+        jValue = jValue ? 0 : 1;
+      }
+      row.push(jValue);
+    }
+    pattern.push(row);
+    if (i === startI) {
+      startI = startI + 2;
+    }
+    if (i + 1 === startI) {
+      startValue = startValue ? 0 : 1;
+    }
+  }
+  return pattern;
+};
+
 /*
+
 export const drawOffCanvas = (cellSize, canvas) => {
   //   console.time("offcanvas");
   const ctx = canvas.getContext("2d");

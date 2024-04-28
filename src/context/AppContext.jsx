@@ -4,13 +4,16 @@ import { deepCopy } from "../helpers/utils";
 const AppContext = createContext();
 
 const defaultState = {
+  pattern: "random",
   speed: 800,
-  cellSize: 20,
+  cellSize: 30,
   playing: false,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case "changePattern":
+      return { ...deepCopy(state), pattern: action.payload };
     case "adjustSpeed":
       return { ...deepCopy(state), speed: action.payload };
     case "changeCellSize":
@@ -37,9 +40,13 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "playMode", payload: status });
   };
 
+  const changePattern = (pattern) => {
+    dispatch({ type: "changePattern", payload: pattern });
+  };
+
   return (
     <AppContext.Provider
-      value={{ ...state, adjustSpeed, changeCellSize, playMode }}
+      value={{ ...state, adjustSpeed, changeCellSize, playMode, changePattern }}
     >
       {children}
     </AppContext.Provider>

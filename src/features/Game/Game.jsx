@@ -4,13 +4,14 @@ import {
   drawOnCanvas,
   generateRowsCols,
   checkConwayRules,
+  generateArrPattern,
 } from "../../helpers/utils";
 import { useAppContext } from "../../context/AppContext";
 
 import "./css/game.css";
 
 const Game = () => {
-  const { speed, cellSize, playing, playMode } = useAppContext();
+  const { pattern, speed, cellSize, playing, playMode } = useAppContext();
   const canvasRef = useRef(null);
   let array = useRef([]);
   let rows = useRef(0);
@@ -26,7 +27,7 @@ const Game = () => {
         ctx: canvasCtx,
       } = generateRowsCols(cellSize, cvs);
 
-      array.current = generateNestedArr(rows.current, cols.current);
+      array.current = generateArrPattern(pattern, canvasRows, canvasCols);
       ctx.current = canvasCtx;
       rows.current = canvasRows;
       cols.current = canvasCols;
@@ -75,7 +76,7 @@ const Game = () => {
       ctx: canvasCtx,
     } = generateRowsCols(cellSize, cvs);
 
-    array.current = generateNestedArr(canvasRows, canvasCols);
+    array.current = generateArrPattern(pattern, canvasRows, canvasCols);
     ctx.current = canvasCtx;
     rows.current = canvasRows;
     cols.current = canvasCols;
@@ -83,7 +84,7 @@ const Game = () => {
     if (array.current.length) {
       drawOnCanvas(array.current, canvasCtx, canvasRows, canvasCols, cellSize);
     }
-  }, [cellSize]);
+  }, [pattern, cellSize]);
 
   return <canvas ref={canvasRef}></canvas>;
 };
