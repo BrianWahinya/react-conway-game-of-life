@@ -1,0 +1,11 @@
+.btn-mode {
+  height: 40px;
+  width: 40px;
+  font-size: 25px;
+  color: #000;
+  padding: 2px;
+  margin: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
