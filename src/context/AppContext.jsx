@@ -7,19 +7,20 @@ const defaultState = {
   pattern: "random",
   speed: 800,
   cellSize: 30,
+  mode: "paused",
   playing: false,
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "changePattern":
-      return { ...deepCopy(state), pattern: action.payload };
+      return { ...deepCopy(state), pattern: action.payload, mode: "restart" };
     case "adjustSpeed":
       return { ...deepCopy(state), speed: action.payload };
     case "changeCellSize":
-      return { ...deepCopy(state), cellSize: action.payload };
-    case "playMode":
-      return { ...deepCopy(state), playing: action.payload };
+      return { ...deepCopy(state), cellSize: action.payload, mode: "restart" };
+    case "changeMode":
+      return { ...deepCopy(state), mode: action.payload };
     default:
       return state;
   }
@@ -36,8 +37,8 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "changeCellSize", payload: parseInt(size) });
   };
 
-  const playMode = (status) => {
-    dispatch({ type: "playMode", payload: status });
+  const changeMode = (status) => {
+    dispatch({ type: "changeMode", payload: status });
   };
 
   const changePattern = (pattern) => {
@@ -46,7 +47,13 @@ const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ ...state, adjustSpeed, changeCellSize, playMode, changePattern }}
+      value={{
+        ...state,
+        adjustSpeed,
+        changeCellSize,
+        changePattern,
+        changeMode,
+      }}
     >
       {children}
     </AppContext.Provider>

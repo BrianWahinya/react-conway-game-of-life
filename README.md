@@ -5,9 +5,9 @@
 Still under development:
 
 - [x] Play, Pause
-- [ ] Restart
+- [x] Restart
 - [x] Speed
 - [x] Cell size
-- [ ] Predefined patterns
+- [x] Predefined patterns
 - [ ] Custom pattern
 - [ ] Styling

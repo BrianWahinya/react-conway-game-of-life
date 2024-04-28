@@ -1,4 +1,4 @@
-import { useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../../../context/AppContext";
 
 const Speed = () => {
   const { speed, adjustSpeed } = useAppContext();
