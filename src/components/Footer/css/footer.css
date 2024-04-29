@@ -1,0 +1,31 @@
+footer {
+  bottom: 0;
+  width: 100%;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: rgba(156, 156, 156, 0.1058823529);
+}
+footer .container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 5px;
+}
+footer .container .pSource,
+footer .container .pCopyright {
+  font-size: small;
+  color: #808080;
+  margin: 7px;
+  text-wrap: nowrap;
+}
+footer .container .pSource a,
+footer .container .pCopyright a {
+  color: #808080;
+  transition: all 500ms;
+}
+footer .container .pSource a:hover,
+footer .container .pCopyright a:hover {
+  color: #1638b2;
+  transition: all 500ms;
+}
