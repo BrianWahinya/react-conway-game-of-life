@@ -47,20 +47,23 @@ export const generateRowsCols = (cellSize, canvas) => {
 
   const { width, height } = canvas;
 
-  const rows = floorToEven(Math.floor(height / cellSize));
-  const cols = floorToEven(Math.floor(width / cellSize));
+  const rows = floorToEven(Math.floor(height / cellSize) - 1);
+  const cols = floorToEven(Math.floor(width / cellSize) - 1);
   return { rows, cols, ctx };
 };
 
 export const drawOnCanvas = (array, ctx, rows, cols, cellSize) => {
+  console.log(rows, cols);
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       const x = j * cellSize;
       const y = i * cellSize;
-      ctx.fillStyle = array[i][j] ? "#242424f5" : "#f7f7f7f5";
-      ctx.fillRect(x, y, cellSize, cellSize);
       ctx.strokeStyle = "#878787";
+      ctx.lineWidth = 1;
       ctx.strokeRect(x, y, cellSize, cellSize);
+
+      ctx.fillStyle = array[i][j] ? "#242424f5" : "#f7f7f7f5";
+      ctx.fillRect(x + 1, y + 1, cellSize - 1, cellSize - 1);
     }
   }
 };

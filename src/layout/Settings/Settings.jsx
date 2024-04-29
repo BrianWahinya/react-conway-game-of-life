@@ -6,7 +6,7 @@ const Settings = () => {
   return (
     <div className="div-settings">
       <Form>
-        <Row noGutters>
+        <Row className="g-0">
           <Col sm={4}>
             <Patterns />
           </Col>
