@@ -47,8 +47,8 @@ export const generateRowsCols = (cellSize, canvas) => {
 
   const { width, height } = canvas;
 
-  const rows = floorToEven(Math.floor(height / cellSize) - 1);
-  const cols = floorToEven(Math.floor(width / cellSize) - 1);
+  const rows = floorToEven(Math.floor(height / cellSize));
+  const cols = floorToEven(Math.floor(width / cellSize));
   return { rows, cols, ctx };
 };
 
