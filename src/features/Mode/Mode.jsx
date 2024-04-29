@@ -1,4 +1,4 @@
-import { Icon } from "../../components";
+import { Button, Icon } from "../../components";
 import { useAppContext } from "../../context/AppContext";
 
 import "./css/mode.css";
@@ -7,18 +7,16 @@ const Mode = () => {
   const { mode, changeMode } = useAppContext();
   return (
     <div className="div-mode">
-      <button
+      <Button
         className="btn-mode btn-play-pause"
         onClick={() => changeMode(mode === "play" ? "pause" : "play")}
-      >
-        {mode === "play" ? <Icon type="pause" /> : <Icon type="play" />}
-      </button>
-      <button
+        name={mode === "play" ? <Icon type="pause" /> : <Icon type="play" />}
+      />
+      <Button
         className="btn-mode btn-restart"
         onClick={() => mode !== "restart" && changeMode("restart")}
-      >
-        <Icon type="restart" />
-      </button>
+        name={<Icon type="restart" />}
+      />
     </div>
   );
 };

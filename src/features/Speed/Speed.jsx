@@ -1,21 +1,23 @@
+import { Select } from "../../components";
 import { useAppContext } from "../../context/AppContext";
+
+const options = [
+  { name: "0.5s", value: 500 },
+  { name: "0.8s", value: 800 },
+  { name: "1s", value: 1000 },
+  { name: "1.5s", value: 1500 },
+];
 
 const Speed = () => {
   const { speed, adjustSpeed } = useAppContext();
   return (
-    <>
-      <label htmlFor="speed">Speed: </label>
-      <select
-        id="speed"
-        value={speed}
-        onChange={(e) => adjustSpeed(e.target.value)}
-      >
-        <option value={500}>0.5s</option>
-        <option value={800}>0.8s</option>
-        <option value={1000}>1s</option>
-        <option value={1500}>1.5s</option>
-      </select>
-    </>
+    <Select
+      id="speed"
+      name="Speed"
+      options={options}
+      value={speed}
+      onChange={(e) => adjustSpeed(e.target.value)}
+    />
   );
 };
 export default Speed;

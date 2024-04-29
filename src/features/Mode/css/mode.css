@@ -1,11 +1,22 @@
+.div-mode {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 .div-mode .btn-mode {
-  height: 40px;
-  width: 40px;
+  height: 30px;
+  width: 30px;
   font-size: 25px;
-  color: #000;
+  color: #202020;
+  background: none;
   padding: 2px;
-  margin: 2px;
+  margin: 5px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(32, 32, 32, 0.568627451);
+}
+.div-mode .btn-mode:hover, .div-mode .btn-mode:focus {
+  background-color: rgba(83, 111, 127, 0.485);
 }

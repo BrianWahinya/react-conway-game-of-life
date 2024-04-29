@@ -1,12 +1,9 @@
 import {
   Collapse,
-  NavItem,
   Nav as ReactNav,
   Navbar,
   NavbarBrand,
-  NavbarText,
   NavbarToggler,
-  Button,
 } from "reactstrap";
 import { useState } from "react";
 import { About, ThemeToggler } from "../../features";
@@ -19,19 +16,23 @@ const Nav = () => {
   const toggle = () => setIsOpen(!isOpen);
   return (
     <Navbar className="justify-content-between" color="dark" dark expand="sm">
-      <NavbarBrand href="/">
+      <NavbarBrand href="/" style={{ fontSize: "1rem" }}>
         <img
           alt="logo"
           src={icon_conway}
           style={{
-            height: 40,
-            width: 40,
+            height: 30,
+            width: 30,
             marginRight: 5,
           }}
         />
-        Conway's Game of Life
+        Game of Life
       </NavbarBrand>
-      <NavbarToggler className="me-2" onClick={toggle} />
+      <NavbarToggler
+        className="me-2"
+        onClick={toggle}
+        style={{ fontSize: "1rem" }}
+      />
       <Collapse isOpen={isOpen} navbar>
         <ReactNav className="ms-auto" navbar>
           <About />

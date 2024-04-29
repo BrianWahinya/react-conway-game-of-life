@@ -4,3 +4,5 @@ export { default as Nav } from "./Nav/Nav.jsx";
 export { default as Footer } from "./Footer/Footer.jsx";
 export { default as Modal } from "./Modal/Modal.jsx";
 export { default as BtnModal } from "./BtnModal/BtnModal.jsx";
+export { default as Button } from "./Button/Button.jsx";
+export { default as Select } from "./Select/Select.jsx";

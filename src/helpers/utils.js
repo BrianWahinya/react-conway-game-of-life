@@ -1,3 +1,26 @@
+const genRandomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+const genRandomStr = (length) => {
+  const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  let randomStr = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomStr += characters.charAt(randomIndex);
+  }
+  return randomStr;
+};
+
+export const genRandomId = () => {
+  const timestamp = new Date().getTime();
+  const randomInt = genRandomInt(10, 99);
+  const randomStr = genRandomStr(3);
+  return `${timestamp}_${randomStr}_${randomInt}`;
+};
+
 export const deepCopy = (obj) => JSON.parse(JSON.stringify(obj));
 
 export const generateRandomArr = (size) =>
@@ -34,7 +57,7 @@ export const drawOnCanvas = (array, ctx, rows, cols, cellSize) => {
     for (let j = 0; j < cols; j++) {
       const x = j * cellSize;
       const y = i * cellSize;
-      ctx.fillStyle = array[i][j] ? "#242424" : "#f7f7f7";
+      ctx.fillStyle = array[i][j] ? "#242424f5" : "#f7f7f7f5";
       ctx.fillRect(x, y, cellSize, cellSize);
       ctx.strokeStyle = "#878787";
       ctx.strokeRect(x, y, cellSize, cellSize);

@@ -1,21 +1,22 @@
+import { Select } from "../../components";
 import { useAppContext } from "../../context/AppContext";
+
+const options = [
+  { name: "20", value: 20 },
+  { name: "30", value: 30 },
+  { name: "50", value: 50 },
+];
 
 const CellSize = () => {
   const { cellSize, changeCellSize } = useAppContext();
   return (
-    <>
-      <label htmlFor="cellsize">Cell Size: </label>
-      <select
-        id="cellsize"
-        value={cellSize}
-        onChange={(e) => changeCellSize(e.target.value)}
-      >
-        {/* <option value={10}>10</option> */}
-        <option value={20}>20</option>
-        <option value={30}>30</option>
-        <option value={50}>50</option>
-      </select>
-    </>
+    <Select
+      id="cellsize"
+      name="Cell Size"
+      options={options}
+      value={cellSize}
+      onChange={(e) => changeCellSize(e.target.value)}
+    />
   );
 };
 export default CellSize;

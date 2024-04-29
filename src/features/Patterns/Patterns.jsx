@@ -1,22 +1,24 @@
+import { Select } from "../../components";
 import { useAppContext } from "../../context/AppContext";
+
+const options = [
+  { name: "Random", value: "random" },
+  { name: "Alternate", value: "alternate" },
+  { name: "Alternate-rectangle", value: "alternate-rectangle" },
+  { name: "Square", value: "square" },
+  { name: "Rectangle", value: "rectangle" },
+];
 
 const Patterns = () => {
   const { pattern, changePattern } = useAppContext();
   return (
-    <>
-      <label htmlFor="pattern">Pattern: </label>
-      <select
-        id="pattern"
-        value={pattern}
-        onChange={(e) => changePattern(e.target.value)}
-      >
-        <option value="random">Random</option>
-        <option value="alternate">Alternate</option>
-        <option value="alternate-rectangle">Alternate Rectangle</option>
-        <option value="square">Square</option>
-        <option value="rectangle">Rectangle</option>
-      </select>
-    </>
+    <Select
+      id="pattern"
+      name="Pattern:"
+      options={options}
+      value={pattern}
+      onChange={(e) => changePattern(e.target.value)}
+    />
   );
 };
 export default Patterns;
