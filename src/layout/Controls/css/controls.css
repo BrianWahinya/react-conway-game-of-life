@@ -1,6 +1,8 @@
 .div-controls {
   margin: 5px;
   width: 95%;
+  height: -moz-fit-content;
+  height: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
