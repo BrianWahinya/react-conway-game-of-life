@@ -2,7 +2,10 @@
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 8px;
 }
 .div-mode .btn-mode {
   height: 30px;
@@ -11,11 +14,11 @@
   color: #202020;
   background: none;
   padding: 2px;
-  margin: 5px;
+  margin: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(32, 32, 32, 0.568627451);
+  border: 1px solid rgba(32, 32, 32, 0.7529411765);
 }
 .div-mode .btn-mode:hover, .div-mode .btn-mode:focus {
   background-color: rgba(114, 158, 183, 0.356);

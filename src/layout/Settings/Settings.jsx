@@ -6,14 +6,14 @@ const Settings = () => {
   return (
     <div className="div-settings">
       <Form>
-        <Row className="g-0">
-          <Col sm={4}>
+        <Row className="g-3">
+          <Col style={{ maxWidth: "fit-content" }}>
             <Patterns />
           </Col>
-          <Col sm={4}>
+          <Col style={{ maxWidth: "fit-content" }}>
             <CellSize />
           </Col>
-          <Col sm={4}>
+          <Col style={{ maxWidth: "fit-content" }}>
             <Speed />
           </Col>
         </Row>
