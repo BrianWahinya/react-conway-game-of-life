@@ -8,3 +8,7 @@ label {
   width: fit-content !important;
   min-width: 125px;
 }
+.form-select:hover,
+.form-select option:hover {
+  cursor: pointer;
+}
