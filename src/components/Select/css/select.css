@@ -6,4 +6,5 @@ label {
   background-color: rgba(237, 237, 237, 0.6549019608) !important;
   width: -moz-fit-content !important;
   width: fit-content !important;
+  min-width: 125px;
 }

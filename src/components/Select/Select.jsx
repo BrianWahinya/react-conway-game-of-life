@@ -5,7 +5,6 @@ import "./css/select.css";
 const selectStyle = {
   outline: "none",
   boxShadow: "none",
-  // border: 'none', // Optional: if you want to remove the border entirely
 };
 
 const Select = ({ id, name, options, value, onChange }) => {
@@ -14,7 +13,7 @@ const Select = ({ id, name, options, value, onChange }) => {
       <Label for={id} sm={2} size="sm">
         {name}
       </Label>
-      <Col sm={10}>
+      <Col sm={12}>
         <Input
           id={id}
           name={name}
