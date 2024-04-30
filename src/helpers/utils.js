@@ -53,7 +53,6 @@ export const generateRowsCols = (cellSize, canvas) => {
 };
 
 export const drawOnCanvas = (array, ctx, rows, cols, cellSize) => {
-  console.log(rows, cols);
   for (let i = 0; i < rows; i++) {
     for (let j = 0; j < cols; j++) {
       const x = j * cellSize;
