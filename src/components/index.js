@@ -6,3 +6,4 @@ export { default as Modal } from "./Modal/Modal.jsx";
 export { default as BtnModal } from "./BtnModal/BtnModal.jsx";
 export { default as Button } from "./Button/Button.jsx";
 export { default as Select } from "./Select/Select.jsx";
+export { default as Accordion } from "./Accordion/Accordion.jsx";

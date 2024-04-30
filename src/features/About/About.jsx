@@ -1,14 +1,9 @@
-import { Modal } from "../../components";
+import { Accordion, Modal } from "../../components";
 import "./css/about.css";
 
 const title = "Conway's Game of Life";
-const body = (
+const contentContext = (
   <>
-    <p>
-      Game of Life is a concept derived from cellular automation and was
-      invented in 1970 by mathematician John Conway.
-    </p>
-    <h6 id="context">Context</h6>
     <p>
       Developing an app that aims to implement and visualize Conway's Game of
       Life rules.
@@ -42,9 +37,11 @@ const body = (
       </a>
       .
     </p>
-    <hr />
-    <h5>Fellow Geeks</h5>
+  </>
+);
 
+const contentGeeks = (
+  <>
     <h6 id="code">Code</h6>
     <p>
       This project is hosted using&nbsp;
@@ -96,6 +93,21 @@ const body = (
       <br />
       You may also see lint errors in the console.
     </p>
+  </>
+);
+
+const accordItems = [
+  { id: "accord-context", header: "Context", content: contentContext },
+  { id: "accord-geeks", header: "Fellow Geeks", content: contentGeeks },
+];
+
+const body = (
+  <>
+    <p>
+      Game of Life is a concept derived from cellular automation and was
+      invented in 1970 by mathematician John Conway.
+    </p>
+    <Accordion accordItems={accordItems} />
   </>
 );
 
