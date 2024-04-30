@@ -13,7 +13,7 @@ const Speed = () => {
   return (
     <Select
       id="speed"
-      name="Speed"
+      name="Speed:"
       options={options}
       value={speed}
       onChange={(e) => adjustSpeed(e.target.value)}

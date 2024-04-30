@@ -12,7 +12,7 @@ const CellSize = () => {
   return (
     <Select
       id="cellsize"
-      name="Cell Size"
+      name="Cell Size:"
       options={options}
       value={cellSize}
       onChange={(e) => changeCellSize(e.target.value)}
