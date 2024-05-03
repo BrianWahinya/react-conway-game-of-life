@@ -1,4 +1,4 @@
-import { Col, Form, FormGroup, Row } from "reactstrap";
+import { Col, Form, Row } from "reactstrap";
 import { CellSize, Patterns, Speed } from "../../features";
 import "./css/settings.css";
 

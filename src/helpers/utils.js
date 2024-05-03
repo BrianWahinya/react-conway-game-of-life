@@ -1,3 +1,15 @@
+export const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
 const genRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -127,6 +139,8 @@ export const generateArrPattern = (pattern, rows, cols) => {
       return generateSquarePattern(rows, cols);
     case "rectangle":
       return generateRectanglePattern(rows, cols);
+    case "triangle":
+      return generateTrianglePattern(rows, cols);
     default:
       return generateNestedArr(rows, cols);
   }
@@ -185,15 +199,14 @@ const generateSquarePattern = (rows, cols) => {
     let jValue = startValue;
     for (let j = 0; j < cols; j++) {
       if (j === startJ) {
-        startJ = startJ + 2;
-        jValue = jValue ? 0 : 1;
+        startJ += 3;
+        jValue = startJ > cols || rows - i < 2 ? 0 : jValue ? 0 : 1;
       }
-
       row.push(jValue);
     }
     pattern.push(row);
     if (i === startI) {
-      startI = startI + 2;
+      startI += 3;
     }
     if (i + 1 === startI) {
       startValue = startValue ? 0 : 1;
@@ -214,17 +227,83 @@ const generateRectanglePattern = (rows, cols) => {
     let jValue = startValue;
     for (let j = 0; j < cols; j++) {
       if (j === startJ) {
-        startJ = startJ + 4;
-        jValue = jValue ? 0 : 1;
+        startJ += 4;
+        jValue = jValue || startJ > cols || startI > rows ? 0 : 1;
       }
       row.push(jValue);
     }
     pattern.push(row);
     if (i === startI) {
-      startI = startI + 2;
+      startI += 2;
     }
     if (i + 1 === startI) {
       startValue = startValue ? 0 : 1;
+    }
+  }
+  return pattern;
+};
+
+const generateTrianglePattern = (rows, cols) => {
+  const pattern = [];
+  let iTarget = 4;
+  let iValue = 1;
+
+  for (let i = 0; i < rows; i++) {
+    const row = [];
+
+    let jTarget = { 1: 3, 3: 2, 5: 1, 7: 0 };
+    let jValueStart = jTarget[iValue];
+    let jValueEnd = jValueStart + { 3: 2, 5: 4 }[iValue];
+    for (let j = 0; j < cols; j++) {
+      if (iValue === 1) {
+        if (j === jValueStart) {
+          row.push(1);
+          jValueStart += 6;
+        } else {
+          row.push(0);
+        }
+      }
+
+      if (iValue === 5) {
+        if (j === jValueStart) {
+          row.push(1);
+        } else if (j === jValueEnd) {
+          row.push(1);
+          jValueStart += 6;
+          jValueEnd = jValueStart + 4;
+        } else if (j > jValueStart && j < jValueEnd) {
+          row.push(1);
+        } else {
+          row.push(0);
+        }
+      }
+
+      if (iValue === 3) {
+        if (j === jValueStart) {
+          row.push(1);
+          jValueStart += 6;
+        } else if (j === jValueEnd) {
+          row.push(1);
+          jValueEnd = jValueStart + 2;
+        } else if (j === jValueEnd - 1) {
+          row.push(1);
+        } else {
+          row.push(0);
+        }
+      }
+
+      if (iValue === 7) {
+        row.push(0);
+      }
+    }
+
+    pattern.push(row);
+    if (i < iTarget) {
+      iValue += 2;
+    }
+    if (i + 1 === iTarget) {
+      iValue = 1;
+      iTarget += 4;
     }
   }
   return pattern;

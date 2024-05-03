@@ -4,18 +4,19 @@ import {
   generateRowsCols,
   checkConwayRules,
   generateArrPattern,
+  debounce,
 } from "../../helpers/utils";
-import { useAppContext } from "../../context/AppContext";
+import { useAppContext } from "../../context/AppContext.jsx";
 
 import "./css/game.css";
 
 const Game = () => {
   const { mode, pattern, speed, cellSize } = useAppContext();
   const canvasRef = useRef(null);
-  let array = useRef([]);
-  let rows = useRef(0);
-  let cols = useRef(0);
-  let ctx = useRef(null);
+  const array = useRef([]);
+  const rows = useRef(0);
+  const cols = useRef(0);
+  const ctx = useRef(null);
 
   const redraw = () => {
     const cvs = canvasRef.current;
@@ -36,28 +37,8 @@ const Game = () => {
   };
 
   useLayoutEffect(() => {
-    const cvs = canvasRef.current;
     if (mode !== "play" && array.current.length < 1) {
-      const {
-        rows: canvasRows,
-        cols: canvasCols,
-        ctx: canvasCtx,
-      } = generateRowsCols(cellSize, cvs);
-
-      array.current = generateArrPattern(pattern, canvasRows, canvasCols);
-      ctx.current = canvasCtx;
-      rows.current = canvasRows;
-      cols.current = canvasCols;
-      // console.log("array", array.current, ctx, canvasCtx, rows, cols);
-      if (array.current.length) {
-        drawOnCanvas(
-          array.current,
-          canvasCtx,
-          canvasRows,
-          canvasCols,
-          cellSize
-        );
-      }
+      redraw();
       return;
     }
 
@@ -78,6 +59,7 @@ const Game = () => {
         cellSize
       );
     };
+
     const timer = setInterval(func, speed);
 
     return () => clearInterval(timer);
@@ -87,6 +69,11 @@ const Game = () => {
     if (mode === "restart") {
       redraw();
     }
+    const debouncedHandleResize = debounce(redraw, 500);
+    window.addEventListener("resize", debouncedHandleResize);
+    return () => {
+      window.removeEventListener("resize", debouncedHandleResize);
+    };
   }, [pattern, cellSize, mode]);
 
   return (

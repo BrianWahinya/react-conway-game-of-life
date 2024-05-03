@@ -1,10 +1,11 @@
 import { createContext, useContext, useReducer } from "react";
 import { deepCopy } from "../helpers/utils";
+import { configs } from "../helpers/configs";
 
 const AppContext = createContext();
 
 const defaultState = {
-  pattern: "random",
+  pattern: configs.pattern,
   speed: 800,
   cellSize: 30,
   mode: "paused",
