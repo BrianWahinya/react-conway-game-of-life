@@ -76,8 +76,6 @@ const Game = () => {
     };
   }, [pattern, cellSize, mode]);
 
-  return (
-    <canvas ref={canvasRef} width={ctx.width} height={ctx.height}></canvas>
-  );
+  return <canvas ref={canvasRef}></canvas>;
 };
 export default Game;

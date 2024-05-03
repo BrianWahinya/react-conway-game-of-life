@@ -49,9 +49,12 @@ export const generateNestedArr = (rows, cols) => {
 const floorToEven = (num) => (num % 2 !== 1 ? num : num - 1);
 
 export const generateRowsCols = (cellSize, canvas) => {
+  const container = document.getElementsByTagName("main")[0];
+  canvas.width = container.innerWidth;
+  canvas.height = container.innerHeight;
   const ctx = canvas.getContext("2d");
 
-  const dpr = window.devicePixelRatio || 1;
+  const dpr = container.devicePixelRatio || 1;
   const rect = canvas.getBoundingClientRect();
   canvas.width = rect.width * dpr;
   canvas.height = rect.height * dpr;
