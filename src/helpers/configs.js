@@ -8,6 +8,6 @@ const patterns = [
 ];
 
 export const configs = {
-  pattern: patterns[3].value,
+  pattern: patterns[0].value,
   patterns,
 };
