@@ -50,8 +50,6 @@ const floorToEven = (num) => (num % 2 !== 1 ? num : num - 1);
 
 export const generateRowsCols = (cellSize, canvas) => {
   const container = document.getElementsByTagName("main")[0];
-  canvas.width = container.innerWidth;
-  canvas.height = container.innerHeight;
   const ctx = canvas.getContext("2d");
 
   const dpr = container.devicePixelRatio || 1;
@@ -203,9 +201,13 @@ const generateSquarePattern = (rows, cols) => {
     for (let j = 0; j < cols; j++) {
       if (j === startJ) {
         startJ += 3;
-        jValue = startJ > cols || rows - i < 2 ? 0 : jValue ? 0 : 1;
+        jValue = jValue ? 0 : 1;
       }
-      row.push(jValue);
+      if (i < rows - (rows % 3) && j < cols - (cols % 3)) {
+        row.push(jValue);
+      } else {
+        row.push(0);
+      }
     }
     pattern.push(row);
     if (i === startI) {
